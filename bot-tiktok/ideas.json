@@ -1,0 +1,38 @@
+[
+  {
+    "id": "septima",
+    "nombre": "Serie: intentando ganar la Séptima",
+    "idea": "Capítulo de una serie: 'Día N intentando ganar la Séptima Libertadores como presidente de Boca'. Contá una decisión clave del capítulo, un giro y dejá un cliffhanger para el próximo video."
+  },
+  {
+    "id": "vendo-o-banco",
+    "nombre": "¿Lo vendo o lo banco?",
+    "idea": "Un dilema de presidente: llega una oferta millonaria por la figura del equipo. Presentá las dos opciones con humor y pedile a la gente que vote en los comentarios qué hacer."
+  },
+  {
+    "id": "peor-presidente",
+    "nombre": "El peor presidente de la historia",
+    "idea": "Storytime de un desastre: todas las malas decisiones que llevaron a que los socios te echen. Autocrítica exagerada y graciosa."
+  },
+  {
+    "id": "superclasico",
+    "nombre": "Ganarle a River",
+    "idea": "Cómo armaste el equipo para ganar el Superclásico en el juego. Cargada sana, sin insultos. Cerrá desafiando a los hinchas de River a superarlo."
+  },
+  {
+    "id": "mercado",
+    "nombre": "Armé el equipo con poca plata",
+    "idea": "Desafío de mercado de pases: armar un equipo competitivo con un presupuesto ridículo. Contá las compras y el resultado."
+  },
+  {
+    "id": "desafio-semanal",
+    "nombre": "Desafío de la semana",
+    "idea": "Presentá el desafío semanal del juego como un reto: 'esta semana el desafío es X, ¿quién me supera?'. Invitá a dejar el puntaje en los comentarios."
+  },
+  {
+    "id": "que-harias",
+    "nombre": "¿Qué harías vos de presidente?",
+    "idea": "Reaccioná a la noticia del día del mundo Boca: contá qué decidiste vos en el juego frente a una situación parecida y preguntale a la gente qué haría.",
+    "requiereTema": true
+  }
+]

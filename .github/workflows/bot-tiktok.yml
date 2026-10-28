@@ -1,0 +1,88 @@
+name: Bot de TikTok
+
+on:
+  schedule:
+    # Lunes, miércoles y viernes a las 18:17 de Argentina (21:17 UTC)
+    - cron: "17 21 * * 1,3,5"
+  workflow_dispatch:
+    inputs:
+      modo:
+        description: "Qué hacer con el video"
+        type: choice
+        options: [borrador, archivo, directo]
+        default: borrador
+      tema:
+        description: "Noticia o tema del día (opcional)"
+        required: false
+      formato:
+        description: "Formato de ideas.json (opcional)"
+        required: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bot-tiktok
+
+jobs:
+  video:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: bot-tiktok
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: bot-tiktok/package-lock.json
+
+      - name: Instalar ffmpeg y fuentes
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg fonts-dejavu-core
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Instalar Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Armar el video
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          AZURE_SPEECH_KEY: ${{ secrets.AZURE_SPEECH_KEY }}
+          AZURE_SPEECH_REGION: ${{ secrets.AZURE_SPEECH_REGION }}
+          TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+          TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          # Los datos del formulario van por variables (no pegados en el script) por seguridad.
+          MODO: ${{ inputs.modo || 'borrador' }}
+          TEMA: ${{ inputs.tema }}
+          FORMATO: ${{ inputs.formato }}
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "::notice::Falta el secreto ANTHROPIC_API_KEY, así que no se armó el video. Mirá bot-tiktok/README.md."
+            exit 0
+          fi
+          args=(--modo "$MODO")
+          if [ -n "$TEMA" ]; then args+=(--tema "$TEMA"); fi
+          if [ -n "$FORMATO" ]; then args+=(--formato "$FORMATO"); fi
+          if [ -z "$AZURE_SPEECH_KEY" ]; then args+=(--voz ninguna); fi
+          node src/main.mjs "${args[@]}"
+
+      - name: Guardar el video para descargarlo
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: video-tiktok
+          path: |
+            bot-tiktok/salida/*/video.mp4
+            bot-tiktok/salida/*/portada.jpg
+            bot-tiktok/salida/*/descripcion.txt
+            bot-tiktok/salida/*/guion.json
+          retention-days: 14
+          if-no-files-found: ignore

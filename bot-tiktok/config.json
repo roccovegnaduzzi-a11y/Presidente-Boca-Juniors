@@ -1,0 +1,39 @@
+{
+  "juego": {
+    "url": "https://bocapresidente.com",
+    "esperaInicial": 3000,
+    "pasos": [
+      { "accion": "click", "texto": "Jugar", "opcional": true, "despues": 1500 },
+      { "accion": "click", "texto": "Continuar", "opcional": true, "despues": 1500 },
+      { "accion": "scroll", "y": 700, "despues": 1200 },
+      { "accion": "scroll", "y": -500, "despues": 1200 },
+      { "accion": "scroll", "y": 900, "despues": 1500 }
+    ]
+  },
+  "video": {
+    "fps": 30,
+    "fuente": "DejaVu Sans",
+    "marca": "bocapresidente.com",
+    "cierre": {
+      "titulo": "¿Te animás a ser presidente?",
+      "web": "bocapresidente.com",
+      "detalle": "Gratis · link en el perfil",
+      "segundos": 2.8
+    },
+    "volumenMusica": 0.18
+  },
+  "voz": {
+    "proveedor": "azure",
+    "nombre": "es-AR-TomasNeural",
+    "velocidad": "+8%"
+  },
+  "claude": {
+    "modelo": "claude-opus-5-5",
+    "esfuerzo": "medium"
+  },
+  "tiktok": {
+    "privacidad": "PUBLIC_TO_EVERYONE",
+    "etiquetaIA": true,
+    "marcaPropia": true
+  }
+}

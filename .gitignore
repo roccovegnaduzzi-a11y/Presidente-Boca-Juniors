@@ -1,0 +1,4 @@
+node_modules/
+bot-tiktok/salida/
+bot-tiktok/.tokens.json
+.env

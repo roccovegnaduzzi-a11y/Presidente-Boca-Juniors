@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pantalla de prueba</title>
+<!-- Página falsa para probar la grabación sin depender del juego real. -->
+<style>
+  body { margin: 0; font-family: system-ui, sans-serif; background: #0b1e4a; color: #fff; }
+  header { padding: 24px; background: #003da5; border-bottom: 6px solid #ffd100; }
+  h1 { margin: 0; font-size: 28px; }
+  button { margin: 24px; padding: 18px 32px; font-size: 22px; border: 0; border-radius: 12px; background: #ffd100; color: #0b1e4a; font-weight: 700; }
+  .tarjeta { margin: 16px 24px; padding: 20px; border-radius: 14px; background: #12307a; }
+  .marcador { font-size: 64px; font-weight: 800; text-align: center; }
+  .barra { height: 14px; border-radius: 7px; background: #ffd100; transition: width .4s; }
+  #plantel .tarjeta { display: flex; justify-content: space-between; }
+</style>
+</head>
+<body>
+  <header><h1>Pantalla de prueba · Presidente</h1></header>
+  <button id="jugar">Jugar</button>
+  <div class="tarjeta"><div class="marcador" id="marcador">0 - 0</div><div>Minuto <span id="minuto">0</span>'</div></div>
+  <div class="tarjeta">Caja del club<div class="barra" id="caja" style="width: 40%"></div></div>
+  <div class="tarjeta">Hinchas contentos<div class="barra" id="hinchas" style="width: 60%"></div></div>
+  <div id="plantel"></div>
+<script>
+  const nombres = ['Arquero', 'Lateral', 'Central', 'Central', 'Lateral', 'Cinco', 'Ocho', 'Diez', 'Extremo', 'Nueve', 'Extremo', 'Suplente', 'Suplente', 'Pibe de inferiores'];
+  document.getElementById('plantel').innerHTML = nombres.map((n, i) => `<div class="tarjeta"><span>${n}</span><b>${60 + (i * 7) % 35}</b></div>`).join('');
+  let minuto = 0, goles = [0, 0];
+  document.getElementById('jugar').onclick = () => setInterval(() => {
+    minuto = Math.min(90, minuto + 3);
+    if (Math.random() < 0.12) goles[Math.random() < 0.7 ? 0 : 1]++;
+    document.getElementById('minuto').textContent = minuto;
+    document.getElementById('marcador').textContent = goles.join(' - ');
+    document.getElementById('caja').style.width = 20 + Math.random() * 70 + '%';
+    document.getElementById('hinchas').style.width = 20 + Math.random() * 70 + '%';
+  }, 300);
+</script>
+</body>
+</html>
