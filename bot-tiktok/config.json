@@ -1,14 +1,377 @@
 {
   "juego": {
-    "url": "https://bocapresidente.com",
-    "esperaInicial": 3000,
-    "pasos": [
-      { "accion": "click", "texto": "Jugar", "opcional": true, "despues": 1500 },
-      { "accion": "click", "texto": "Continuar", "opcional": true, "despues": 1500 },
-      { "accion": "scroll", "y": 700, "despues": 1200 },
-      { "accion": "scroll", "y": -500, "despues": 1200 },
-      { "accion": "scroll", "y": 900, "despues": 1500 }
-    ]
+    "url": "https://bocapresidente.com/jugar/",
+    "ocultarFotosReales": true,
+    "recorridoPorDefecto": "tabla",
+    "recorridos": {
+      "tabla": {
+        "descripcion": "La tabla real de la Zona A, Boca en la tabla anual y el calendario con el próximo partido",
+        "pasos": [
+          {
+            "accion": "cortar"
+          },
+          {
+            "accion": "empezar",
+            "inicio": "hoy"
+          },
+          {
+            "accion": "grabar"
+          },
+          {
+            "accion": "esperar",
+            "ms": 1800
+          },
+          {
+            "accion": "pestana",
+            "id": "tablas",
+            "despues": 1500
+          },
+          {
+            "accion": "scroll",
+            "y": 560,
+            "despues": 2600
+          },
+          {
+            "accion": "scroll",
+            "y": 520,
+            "despues": 2200
+          },
+          {
+            "accion": "arriba",
+            "despues": 900
+          },
+          {
+            "accion": "click",
+            "texto": "Tabla anual",
+            "opcional": true,
+            "despues": 1200
+          },
+          {
+            "accion": "scroll",
+            "y": 560,
+            "despues": 2400
+          },
+          {
+            "accion": "pestana",
+            "id": "calendario",
+            "despues": 1500
+          },
+          {
+            "accion": "scroll",
+            "y": 420,
+            "despues": 2500
+          }
+        ]
+      },
+      "plantel": {
+        "descripcion": "El plantel en cartas, la formación y las estadísticas",
+        "pasos": [
+          {
+            "accion": "cortar"
+          },
+          {
+            "accion": "empezar",
+            "inicio": "hoy"
+          },
+          {
+            "accion": "grabar"
+          },
+          {
+            "accion": "pestana",
+            "id": "plantel",
+            "despues": 1400
+          },
+          {
+            "accion": "scroll",
+            "y": 620,
+            "despues": 1800
+          },
+          {
+            "accion": "scroll",
+            "y": 700,
+            "despues": 1800
+          },
+          {
+            "accion": "scroll",
+            "y": 700,
+            "despues": 1500
+          },
+          {
+            "accion": "arriba",
+            "despues": 900
+          },
+          {
+            "accion": "click",
+            "texto": "Formación",
+            "opcional": true,
+            "despues": 1200
+          },
+          {
+            "accion": "scroll",
+            "y": 600,
+            "despues": 2600
+          },
+          {
+            "accion": "pestana",
+            "id": "estadisticas",
+            "despues": 1400
+          },
+          {
+            "accion": "scroll",
+            "y": 500,
+            "despues": 2200
+          }
+        ]
+      },
+      "mercado": {
+        "descripcion": "El mercado de pases: el pedido del DT, la lista de jugadores y la sala de negociación",
+        "pasos": [
+          {
+            "accion": "cortar"
+          },
+          {
+            "accion": "empezar",
+            "inicio": "2027"
+          },
+          {
+            "accion": "adelantar",
+            "libroAbierto": true
+          },
+          {
+            "accion": "grabar"
+          },
+          {
+            "accion": "pestana",
+            "id": "mercado",
+            "despues": 1500
+          },
+          {
+            "accion": "scroll",
+            "y": 650,
+            "despues": 1800
+          },
+          {
+            "accion": "scroll",
+            "y": 650,
+            "despues": 1800
+          },
+          {
+            "accion": "click",
+            "selector": "#main [data-action=openNegotiation]:not([title=\"Libro de pases cerrado\"])",
+            "opcional": false,
+            "despues": 3000
+          },
+          {
+            "accion": "click",
+            "selector": "#sala [data-action=salaPropuesta], #sala [data-action=salaProponer]",
+            "opcional": true,
+            "despues": 3500
+          },
+          {
+            "accion": "click",
+            "selector": "#sala [data-action=salaAjustar][data-tier=\"1\"]",
+            "opcional": true,
+            "despues": 450
+          },
+          {
+            "accion": "click",
+            "selector": "#sala [data-action=salaAjustar][data-tier=\"1\"]",
+            "opcional": true,
+            "despues": 450
+          },
+          {
+            "accion": "click",
+            "selector": "#sala [data-action=salaAjustar][data-tier=\"1\"]",
+            "opcional": true,
+            "despues": 450
+          },
+          {
+            "accion": "click",
+            "selector": "#sala [data-action=salaPropuesta], #sala [data-action=salaProponer]",
+            "opcional": true,
+            "despues": 3500
+          },
+          {
+            "accion": "esperar",
+            "ms": 1500
+          }
+        ]
+      },
+      "partido": {
+        "descripcion": "El próximo partido real de Boca jugado en vivo, de la previa al final",
+        "pasos": [
+          {
+            "accion": "cortar"
+          },
+          {
+            "accion": "empezar",
+            "inicio": "hoy"
+          },
+          {
+            "accion": "irAlPartido"
+          },
+          {
+            "accion": "grabar"
+          },
+          {
+            "accion": "esperar",
+            "ms": 1800
+          },
+          {
+            "accion": "jugarPartido",
+            "velocidad": "max",
+            "hastaMinuto": 32
+          },
+          {
+            "accion": "cortar"
+          },
+          {
+            "accion": "jugarPartido",
+            "velocidad": "igual",
+            "hastaMinuto": 80
+          },
+          {
+            "accion": "grabar"
+          },
+          {
+            "accion": "jugarPartido",
+            "velocidad": "igual"
+          },
+          {
+            "accion": "esperar",
+            "ms": 3000
+          }
+        ]
+      },
+      "fin-de-mandato": {
+        "descripcion": "La gestión adelantada hasta las elecciones de diciembre de 2027: el escrutinio, el resultado y la imagen de la gestión",
+        "pasos": [
+          {
+            "accion": "cortar"
+          },
+          {
+            "accion": "empezar",
+            "inicio": "hoy"
+          },
+          {
+            "accion": "adelantar",
+            "elecciones": true
+          },
+          {
+            "accion": "grabar"
+          },
+          {
+            "accion": "esperar",
+            "ms": 11000
+          },
+          {
+            "accion": "esperar",
+            "ms": 2500
+          },
+          {
+            "accion": "click",
+            "selector": "[data-action=cerrarNocheElectoral47]",
+            "opcional": true,
+            "despues": 2500
+          },
+          {
+            "accion": "decisiones",
+            "max": 1
+          },
+          {
+            "accion": "js",
+            "codigo": "typeof compartir72 === 'function' && (compartir72(), true)",
+            "opcional": true,
+            "despues": 4500
+          }
+        ]
+      },
+      "desafio": {
+        "descripcion": "El desafío de la semana: la situación de arranque, el plantel y el primer partido",
+        "pasos": [
+          {
+            "accion": "cortar"
+          },
+          {
+            "accion": "empezar",
+            "modo": "semanal72"
+          },
+          {
+            "accion": "grabar"
+          },
+          {
+            "accion": "esperar",
+            "ms": 2500
+          },
+          {
+            "accion": "pestana",
+            "id": "plantel",
+            "despues": 1400
+          },
+          {
+            "accion": "scroll",
+            "y": 650,
+            "despues": 1800
+          },
+          {
+            "accion": "pestana",
+            "id": "finanzas",
+            "despues": 1600
+          },
+          {
+            "accion": "scroll",
+            "y": 500,
+            "despues": 1800
+          },
+          {
+            "accion": "cortar"
+          },
+          {
+            "accion": "irAlPartido"
+          },
+          {
+            "accion": "grabar"
+          },
+          {
+            "accion": "jugarPartido",
+            "velocidad": "max",
+            "hastaMinuto": 25
+          }
+        ]
+      },
+      "prueba": {
+        "descripcion": "Para \"npm run prueba\": la pantalla falsa de ejemplos/juego-de-prueba.html",
+        "pasos": [
+          {
+            "accion": "click",
+            "texto": "Jugar",
+            "opcional": true,
+            "despues": 1500
+          },
+          {
+            "accion": "click",
+            "texto": "Continuar",
+            "opcional": true,
+            "despues": 1500
+          },
+          {
+            "accion": "scroll",
+            "y": 700,
+            "despues": 1200
+          },
+          {
+            "accion": "scroll",
+            "y": -500,
+            "despues": 1200
+          },
+          {
+            "accion": "scroll",
+            "y": 900,
+            "despues": 1500
+          }
+        ]
+      }
+    }
   },
   "video": {
     "fps": 30,
@@ -20,20 +383,29 @@
       "detalle": "Gratis · link en el perfil",
       "segundos": 2.8
     },
+    "colaSinCta": 1.2,
     "volumenMusica": 0.18
   },
   "voz": {
-    "proveedor": "azure",
+    "proveedor": "ninguna",
     "nombre": "es-AR-TomasNeural",
-    "velocidad": "+8%"
+    "velocidad": "+8%",
+    "ritmoPropio": {
+      "palabrasPorSegundo": 2.3,
+      "minimo": 1.8,
+      "pausa": 0.6
+    }
   },
   "claude": {
     "modelo": "claude-opus-5-5",
     "esfuerzo": "medium"
   },
+  "supabase": {
+    "url": "https://dognkjvuzlhtzhvvovbt.supabase.co",
+    "nota": "Solo lectura del ranking público con la clave pública del juego (la misma que usa el sitio). Nunca se leen nombres ni usuarios."
+  },
   "tiktok": {
     "privacidad": "PUBLIC_TO_EVERYONE",
-    "etiquetaIA": true,
-    "marcaPropia": true
+    "etiquetaIA": true
   }
 }

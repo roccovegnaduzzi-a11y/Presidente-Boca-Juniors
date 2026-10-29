@@ -2,7 +2,7 @@
   "name": "bot-tiktok-boca-presidente",
   "version": "1.0.0",
   "private": true,
-  "description": "Arma videos de Boca Presidente para TikTok: guion con IA, voz en off, subtítulos, edición con ffmpeg y subida por la API de TikTok.",
+  "description": "Arma videos de Boca Presidente para TikTok: guion con IA y datos reales, grabación del juego, subtítulos para leer con tu voz, edición con ffmpeg y subida a borradores por la API de TikTok.",
   "type": "module",
   "engines": {
     "node": ">=20"
@@ -10,7 +10,10 @@
   "scripts": {
     "video": "node src/main.mjs",
     "autorizar": "node src/autorizar.mjs",
-    "prueba": "node src/main.mjs --guion ejemplos/guion-ejemplo.json --voz ninguna --url ejemplos/juego-de-prueba.html"
+    "prueba": "node src/main.mjs --guion ejemplos/guion-ejemplo.json --voz ninguna --url ejemplos/juego-de-prueba.html --recorrido prueba",
+    "prueba-real": "node src/main.mjs --guion ejemplos/guion-opinion.json --cta no --recorrido tabla",
+    "datos": "node src/main.mjs --solo-datos",
+    "zonas": "node src/zonas.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.3.0",

@@ -2,37 +2,72 @@
   {
     "id": "septima",
     "nombre": "Serie: intentando ganar la Séptima",
-    "idea": "Capítulo de una serie: 'Día N intentando ganar la Séptima Libertadores como presidente de Boca'. Contá una decisión clave del capítulo, un giro y dejá un cliffhanger para el próximo video."
+    "idea": "Capítulo de una serie: 'Día N intentando ganar la Séptima Libertadores como presidente de Boca'. Contá una decisión clave del capítulo, un giro y dejá un cliffhanger para el próximo video.",
+    "recorrido": "partido",
+    "cta": true
   },
   {
     "id": "vendo-o-banco",
     "nombre": "¿Lo vendo o lo banco?",
-    "idea": "Un dilema de presidente: llega una oferta millonaria por la figura del equipo. Presentá las dos opciones con humor y pedile a la gente que vote en los comentarios qué hacer."
+    "idea": "Un dilema de presidente: llega una oferta millonaria por la figura del equipo. Presentá las dos opciones con humor y pedile a la gente que vote en los comentarios qué hacer.",
+    "recorrido": "mercado",
+    "cta": true
   },
   {
     "id": "peor-presidente",
     "nombre": "El peor presidente de la historia",
-    "idea": "Storytime de un desastre: todas las malas decisiones que llevaron a que los socios te echen. Autocrítica exagerada y graciosa."
+    "idea": "Storytime de un mandato en el juego que termina en las elecciones de diciembre de 2027: las decisiones que tomaste y cómo te fue en el escrutinio. Si te reeligieron, contalo con sorpresa; si perdiste, autocrítica exagerada y graciosa.",
+    "recorrido": "fin-de-mandato",
+    "cta": true
   },
   {
     "id": "superclasico",
     "nombre": "Ganarle a River",
-    "idea": "Cómo armaste el equipo para ganar el Superclásico en el juego. Cargada sana, sin insultos. Cerrá desafiando a los hinchas de River a superarlo."
+    "idea": "El próximo partido de Boca jugado en el juego (si en los datos el próximo rival es River, es el Superclásico). Contá cómo salió en el juego, sin insultos ni apodos para el rival. Cerrá desafiando a los hinchas a que lo jueguen.",
+    "recorrido": "partido",
+    "cta": true
   },
   {
     "id": "mercado",
     "nombre": "Armé el equipo con poca plata",
-    "idea": "Desafío de mercado de pases: armar un equipo competitivo con un presupuesto ridículo. Contá las compras y el resultado."
+    "idea": "Desafío de mercado de pases: el DT pide un refuerzo y el presidente negocia en la sala. Contá a quién fuiste a buscar y cómo fue la negociación.",
+    "recorrido": "mercado",
+    "cta": true
   },
   {
     "id": "desafio-semanal",
     "nombre": "Desafío de la semana",
-    "idea": "Presentá el desafío semanal del juego como un reto: 'esta semana el desafío es X, ¿quién me supera?'. Invitá a dejar el puntaje en los comentarios."
+    "idea": "Presentá el desafío semanal del juego (está en los datos) como un reto: 'esta semana el desafío es X, ¿quién me supera?'. Invitá a dejar el puntaje en los comentarios.",
+    "recorrido": "desafio",
+    "cta": true
+  },
+  {
+    "id": "opinion-tabla",
+    "nombre": "Opinión de hincha: cómo viene Boca",
+    "idea": "Opinión de hincha sobre cómo viene Boca en la realidad, con los datos reales (posición en la zona y en la tabla anual, próximo partido, lesionados). El juego aparece de fondo mostrando la tabla. Tomá una postura y preguntá qué piensan.",
+    "recorrido": "tabla",
+    "cta": false
+  },
+  {
+    "id": "previa",
+    "nombre": "La previa: qué equipo pondría",
+    "idea": "La previa del próximo partido real de Boca (rival y día, de los datos): qué once pondrías vos, a quién extrañás por lesión y qué te genera el partido. El juego aparece de fondo mostrando el plantel. Preguntá qué once pondría la gente.",
+    "recorrido": "plantel",
+    "cta": false
+  },
+  {
+    "id": "reaccion",
+    "nombre": "Reacción de hincha",
+    "idea": "Reacción de hincha a lo que pasó esta semana en Boca (de los datos reales o del tema del día): qué sentiste y qué harías vos si fueras presidente. El juego aparece de fondo con un partido. Nada de publicidad: es tu opinión.",
+    "recorrido": "partido",
+    "cta": false
   },
   {
     "id": "que-harias",
     "nombre": "¿Qué harías vos de presidente?",
     "idea": "Reaccioná a la noticia del día del mundo Boca: contá qué decidiste vos en el juego frente a una situación parecida y preguntale a la gente qué haría.",
-    "requiereTema": true
+    "requiereTema": true,
+    "recorrido": "tabla",
+    "cta": false
   }
 ]

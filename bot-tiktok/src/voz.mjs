@@ -32,9 +32,11 @@ async function sintetizarAzure(texto, voz, archivo) {
 
 // Arma la pista de voz frase por frase. Así sabemos exactamente cuándo empieza y termina
 // cada frase, y los subtítulos quedan sincronizados sin tener que transcribir el audio.
-// Con proveedor "ninguna" calcula los tiempos a ojo y deja silencio (para probar, o para
-// grabar la voz o poner un sonido directamente en TikTok).
+// Con proveedor "ninguna" (lo que se usa por defecto) deja silencio: la voz la graba el dueño de la cuenta desde el
+// editor de TikTok, leyendo los subtítulos. Los tiempos salen de "ritmoPropio" (config.json): un poco más lentos que
+// una voz sintética y con un respiro entre frases, para que se pueda leer encima sin apurarse.
 export async function generarVoz({ lineas, voz, carpeta }) {
+  const ritmo = { palabrasPorSegundo: 2.3, minimo: 1.8, pausa: 0.6, ...voz.ritmoPropio };
   const tiempos = [];
   const partes = [];
   let t = 0;
@@ -44,8 +46,8 @@ export async function generarVoz({ lineas, voz, carpeta }) {
     let largo;
     if (voz.proveedor === 'ninguna') {
       const palabras = texto.split(/\s+/).length;
-      largo = Math.max(1.2, palabras / 2.7 + 0.35);
-      await correr('ffmpeg', ['-y', '-f', 'lavfi', '-i', 'anullsrc=r=44100:cl=mono', '-t', String(largo + PAUSA), parte]);
+      largo = Math.max(ritmo.minimo, palabras / ritmo.palabrasPorSegundo + 0.3);
+      await correr('ffmpeg', ['-y', '-f', 'lavfi', '-i', 'anullsrc=r=44100:cl=mono', '-t', String(largo + ritmo.pausa), parte]);
     } else if (voz.proveedor === 'azure') {
       const mp3 = parte.replace(/\.wav$/, '.mp3');
       await sintetizarAzure(texto, voz, mp3);

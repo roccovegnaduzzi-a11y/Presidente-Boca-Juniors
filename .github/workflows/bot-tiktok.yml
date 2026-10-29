@@ -17,6 +17,19 @@ on:
       formato:
         description: "Formato de ideas.json (opcional)"
         required: false
+      cta:
+        description: "¿Invita a jugar? (auto = lo que diga el formato)"
+        type: choice
+        options: [auto, si, no]
+        default: auto
+      recorrido:
+        description: "Recorrido del juego de config.json (opcional: tabla, plantel, mercado, partido, fin-de-mandato, desafio)"
+        required: false
+      voz:
+        description: "Voz del video (ninguna = la grabás vos en TikTok)"
+        type: choice
+        options: [ninguna, azure]
+        default: ninguna
 
 permissions:
   contents: read
@@ -27,7 +40,7 @@ concurrency:
 jobs:
   video:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     defaults:
       run:
         working-directory: bot-tiktok
@@ -63,15 +76,23 @@ jobs:
           MODO: ${{ inputs.modo || 'borrador' }}
           TEMA: ${{ inputs.tema }}
           FORMATO: ${{ inputs.formato }}
+          CTA: ${{ inputs.cta || 'auto' }}
+          RECORRIDO: ${{ inputs.recorrido }}
+          VOZ: ${{ inputs.voz || 'ninguna' }}
         run: |
           if [ -z "$ANTHROPIC_API_KEY" ]; then
             echo "::notice::Falta el secreto ANTHROPIC_API_KEY, así que no se armó el video. Mirá bot-tiktok/README.md."
             exit 0
           fi
-          args=(--modo "$MODO")
+          if [ "$VOZ" = "azure" ] && [ -z "$AZURE_SPEECH_KEY" ]; then
+            echo "::warning::Pediste la voz de Azure pero falta AZURE_SPEECH_KEY: el video sale sin voz (la grabás vos)."
+            VOZ=ninguna
+          fi
+          args=(--modo "$MODO" --voz "$VOZ" --datos auto)
           if [ -n "$TEMA" ]; then args+=(--tema "$TEMA"); fi
           if [ -n "$FORMATO" ]; then args+=(--formato "$FORMATO"); fi
-          if [ -z "$AZURE_SPEECH_KEY" ]; then args+=(--voz ninguna); fi
+          if [ "$CTA" != "auto" ]; then args+=(--cta "$CTA"); fi
+          if [ -n "$RECORRIDO" ]; then args+=(--recorrido "$RECORRIDO"); fi
           node src/main.mjs "${args[@]}"
 
       - name: Guardar el video para descargarlo
@@ -82,7 +103,11 @@ jobs:
           path: |
             bot-tiktok/salida/*/video.mp4
             bot-tiktok/salida/*/portada.jpg
+            bot-tiktok/salida/*/zonas.jpg
             bot-tiktok/salida/*/descripcion.txt
+            bot-tiktok/salida/*/para-leer.txt
             bot-tiktok/salida/*/guion.json
+            bot-tiktok/salida/*/datos.json
+            bot-tiktok/salida/*/error.png
           retention-days: 14
           if-no-files-found: ignore

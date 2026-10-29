@@ -107,7 +107,8 @@ export async function subirBorrador(token, archivo) {
 
 // Modo directo: publica sin pasar por la app. Necesita el permiso video.publish, y mientras TikTok
 // no apruebe la app (auditoría), solo deja publicar en cuentas privadas.
-export async function publicarDirecto(token, archivo, { titulo, privacidad, segundos, etiquetaIA, marcaPropia }) {
+// El aviso de contenido promocional lo decide el dueño de la cuenta en la app, video por video: el bot nunca lo activa.
+export async function publicarDirecto(token, archivo, { titulo, privacidad, segundos, etiquetaIA }) {
   const creador = await llamar(token, '/post/publish/creator_info/query/');
   if (!creador.privacy_level_options.includes(privacidad)) {
     throw new Error(`Tu cuenta no permite "${privacidad}". Opciones: ${creador.privacy_level_options.join(', ')}`);
@@ -124,7 +125,7 @@ export async function publicarDirecto(token, archivo, { titulo, privacidad, segu
       disable_stitch: false,
       disable_comment: false,
       video_cover_timestamp_ms: 1200,
-      brand_organic_toggle: marcaPropia, // promociona algo propio: lleva la etiqueta de contenido promocional
+      brand_organic_toggle: false, // el aviso de contenido promocional se pone (o no) a mano en la app
       brand_content_toggle: false,
       is_aigc: etiquetaIA, // la voz es generada con IA
     },
